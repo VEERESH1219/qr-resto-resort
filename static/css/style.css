@@ -44,3 +44,25 @@ p {
 .resort {
     background: #3498db;
 }
+
+.page {
+    padding: 30px;
+    text-align: center;
+}
+
+form {
+    max-width: 300px;
+    margin: auto;
+}
+
+input, button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+}
+
+.back {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+}

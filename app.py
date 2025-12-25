@@ -16,3 +16,11 @@ def resort():
 
 if __name__ == "__main__":
     app.run(debug=True)
+    
+@app.route("/menu")
+def menu():
+    return render_template("menu.html")
+
+@app.route("/table-booking")
+def table_booking():
+    return render_template("table_booking.html")
