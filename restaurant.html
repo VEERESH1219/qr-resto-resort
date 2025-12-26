@@ -20,31 +20,30 @@ header{
     text-align:center;
     padding:40px 16px;
 }
-header h1{margin:0;font-size:30px}
+header h1{margin:0}
 header p{margin-top:6px;opacity:.95}
 
-/* CONTAINER */
+/* LAYOUT */
 .container{
-    max-width:1000px;
+    max-width:1200px;
     margin:auto;
     padding:20px;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:24px;
 }
 
-/* MENU GRID */
-.menu-grid{
+/* MENU */
+.menu{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
-
-/* DISH CARD */
 .dish{
     background:#fff;
     border-radius:16px;
-    overflow:hidden;
     box-shadow:0 10px 25px rgba(0,0,0,.12);
-    display:flex;
-    flex-direction:column;
+    overflow:hidden;
 }
 .dish img{
     width:100%;
@@ -53,66 +52,69 @@ header p{margin-top:6px;opacity:.95}
 }
 .dish-body{
     padding:14px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
 }
-.dish h3{
-    margin:0;
-    font-size:18px;
-}
+.dish h3{margin:0}
 .price{
-    font-weight:700;
     color:#c0392b;
+    font-weight:700;
+    margin:6px 0;
 }
-
-/* BUTTON */
-.btn{
-    margin-top:auto;
-    padding:12px;
-    border-radius:10px;
-    text-align:center;
-    text-decoration:none;
+.dish button{
+    width:100%;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#c0392b;
     color:#fff;
     font-weight:600;
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
     cursor:pointer;
-    transition:transform .15s,box-shadow .15s;
 }
-.btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 18px rgba(0,0,0,.25);
-}
-.btn:active{transform:scale(.97)}
 
-/* TABLE BOOKING CARD */
-.booking{
+/* CART */
+.cart{
     background:#fff;
     border-radius:16px;
     padding:18px;
     box-shadow:0 10px 25px rgba(0,0,0,.12);
-    margin-top:28px;
 }
-.booking h2{margin-top:0}
-.booking input{
-    width:100%;
-    padding:12px;
+.cart h2{margin-top:0}
+.cart-item{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:8px;
+    font-size:14px;
+}
+.total{
+    font-weight:700;
+    font-size:18px;
     margin-top:10px;
-    border-radius:8px;
-    border:1px solid #ccc;
-    font-size:15px;
 }
-.booking .btn{
-    margin-top:14px;
+
+/* PAY */
+.pay{
+    width:100%;
+    margin-top:16px;
+    padding:14px;
+    background:#27ae60;
+    color:#fff;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
 }
 
 /* BACK */
 .back{
     display:block;
-    margin:22px auto 0;
     text-align:center;
+    margin-top:20px;
     color:#555;
     text-decoration:none;
+}
+
+@media(max-width:900px){
+    .container{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -120,117 +122,110 @@ header p{margin-top:6px;opacity:.95}
 <body>
 
 <header>
-    <h1>🍽 Restaurant Menu</h1>
-    <p>Fresh food • Best prices</p>
+<h1>🍽 Restaurant Menu</h1>
+<p>Select items • Order & Pay</p>
 </header>
 
 <div class="container">
 
-    <!-- MENU -->
-    <div class="menu-grid">
+<!-- MENU -->
+<div class="menu">
 
-        <div class="dish">
-            <img src="images/dish1.jpg" alt="">
-            <div class="dish-body">
-                <h3>Veg Biryani</h3>
-                <div class="price">₹180</div>
-                <button class="btn"
-                    onclick="selectItem('Restaurant','Veg Biryani',180)">
-                    Add / Book
-                </button>
-            </div>
-        </div>
-
-        <div class="dish">
-            <img src="images/dish2.jpg" alt="">
-            <div class="dish-body">
-                <h3>Chicken Biryani</h3>
-                <div class="price">₹220</div>
-                <button class="btn"
-                    onclick="selectItem('Restaurant','Chicken Biryani',220)">
-                    Add / Book
-                </button>
-            </div>
-        </div>
-
-        <div class="dish">
-            <img src="images/dish3.jpg" alt="">
-            <div class="dish-body">
-                <h3>Paneer Butter Masala</h3>
-                <div class="price">₹160</div>
-                <button class="btn"
-                    onclick="selectItem('Restaurant','Paneer Butter Masala',160)">
-                    Add / Book
-                </button>
-            </div>
-        </div>
-
-        <div class="dish">
-            <img src="images/dish4.jpg" alt="">
-            <div class="dish-body">
-                <h3>Soft Drinks</h3>
-                <div class="price">₹40</div>
-                <button class="btn"
-                    onclick="selectItem('Restaurant','Soft Drinks',40)">
-                    Add / Book
-                </button>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- TABLE BOOKING -->
-    <div class="booking">
-        <h2>Table Booking</h2>
-        <input id="name" placeholder="Name">
-        <input id="mobile" placeholder="Mobile">
-        <input type="date">
-        <input type="time">
-        <input type="number" placeholder="Persons">
-
-        <button class="btn" onclick="bookTable()">
-            Book Table
-        </button>
-    </div>
-
-    <a href="index.html" class="back">⬅ Back to Home</a>
+<div class="dish">
+<img src="images/dish1.jpg">
+<div class="dish-body">
+<h3>Veg Biryani</h3>
+<div class="price">₹180</div>
+<button onclick="addToCart('Veg Biryani',180)">Add</button>
+</div>
 </div>
 
+<div class="dish">
+<img src="images/dish2.jpg">
+<div class="dish-body">
+<h3>Chicken Biryani</h3>
+<div class="price">₹220</div>
+<button onclick="addToCart('Chicken Biryani',220)">Add</button>
+</div>
+</div>
+
+<div class="dish">
+<img src="images/dish3.jpg">
+<div class="dish-body">
+<h3>Paneer Butter Masala</h3>
+<div class="price">₹160</div>
+<button onclick="addToCart('Paneer Butter Masala',160)">Add</button>
+</div>
+</div>
+
+<div class="dish">
+<img src="images/dish4.jpg">
+<div class="dish-body">
+<h3>Soft Drinks</h3>
+<div class="price">₹40</div>
+<button onclick="addToCart('Soft Drinks',40)">Add</button>
+</div>
+</div>
+
+</div>
+
+<!-- CART -->
+<div class="cart">
+<h2>Your Order</h2>
+
+<div id="cartItems"></div>
+<div class="total" id="cartTotal">Total: ₹0</div>
+
+<button class="pay" onclick="checkout()">Proceed to Payment</button>
+</div>
+
+</div>
+
+<a href="index.html" class="back">⬅ Back to Home</a>
+
 <script>
-function selectItem(service, item, price){
-    const booking = {
-        service: service,
-        item: item,
-        amount: price
-    };
-    localStorage.setItem("booking", JSON.stringify(booking));
-    window.location.href = "payment.html";
+let cart=[];
+
+/* ADD TO CART */
+function addToCart(name,price){
+    const item=cart.find(i=>i.name===name);
+    if(item) item.qty++;
+    else cart.push({name,price,qty:1});
+    renderCart();
 }
 
-function bookTable(){
-    const name = document.getElementById("name").value.trim();
-    const mobile = document.getElementById("mobile").value.trim();
+/* RENDER CART */
+function renderCart(){
+    let html="",total=0;
+    cart.forEach(i=>{
+        total+=i.price*i.qty;
+        html+=`
+        <div class="cart-item">
+            <span>${i.name} × ${i.qty}</span>
+            <span>₹${i.price*i.qty}</span>
+        </div>`;
+    });
+    document.getElementById("cartItems").innerHTML=html;
+    document.getElementById("cartTotal").innerText="Total: ₹"+total;
+}
 
-    if (name === "") {
-        alert("Please enter your name");
+/* CHECKOUT */
+function checkout(){
+    if(cart.length===0){
+        alert("Please add items to cart");
         return;
     }
 
-    if (mobile.length !== 10 || isNaN(mobile)) {
-        alert("Please enter a valid 10-digit mobile number");
-        return;
-    }
+    const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
 
-    const booking = {
-        service: "Restaurant - Table Booking",
-        item: "Table Booking",
-        amount: 500
-    };
+    localStorage.setItem("booking",JSON.stringify({
+        service:"Restaurant Order",
+        item:cart.map(i=>i.name+"×"+i.qty).join(", "),
+        amount:total
+    }));
 
-    localStorage.setItem("booking", JSON.stringify(booking));
-    window.location.href = "payment.html";
+    window.location.href="payment.html";
 }
-
 </script>
 
 </body>
