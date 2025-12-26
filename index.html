@@ -15,83 +15,126 @@ body {
 
 /* HERO */
 .hero {
-    background: linear-gradient(135deg, #c0392b, #e67e22);
-    color: white;
+    background: 
+      linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+      url("images/hero.jpg") center/cover no-repeat;
+    padding: 120px 20px;
     text-align: center;
-    padding: 60px 20px 70px;
-}
-.hero h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-}
-.hero p {
-    font-size: 17px;
-    opacity: 0.95;
+    color: white;
 }
 
-/* CONTAINER */
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+
 .container {
     padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+
+/* CARD GRID */
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: -40px;
 }
 
 /* CARD */
 .card {
     background: white;
     border-radius: 18px;
-    padding: 26px;
-    margin-top: -50px;
-    box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
     text-align: center;
+}
+
+.card-content h2 {
+    margin-bottom: 8px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
 }
 
 /* BUTTONS */
 .btn {
     display: block;
-    padding: 18px;
-    margin-top: 22px;
+    margin-top: 15px;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 18px;
     text-decoration: none;
-    font-size: 19px;
     color: white;
-    border-radius: 14px;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-.btn:active {
-    transform: scale(0.97);
-}
-.restaurant {
-    background: #c0392b;
-}
-.resort {
-    background: #2980b9;
 }
 
-/* FOOT NOTE */
-.note {
-    margin-top: 18px;
-    font-size: 14px;
-    color: #777;
+.btn-restaurant {
+    background: #c0392b;
+}
+
+.btn-resort {
+    background: #2980b9;
 }
 </style>
 </head>
 
 <body>
 
+<!-- HERO -->
 <div class="hero">
-    <h1>Restaurant & Resort</h1>
-    <p>Scan • Choose • Book • Relax</p>
+    <h1>Welcome</h1>
+    <p>Dine • Stay • Relax</p>
 </div>
 
+<!-- CONTENT -->
 <div class="container">
-    <div class="card">
-        <h2>Welcome</h2>
-        <p>Please choose your service</p>
+    <div class="grid">
 
-        <a href="restaurant.html" class="btn restaurant">🍽 Restaurant</a>
-        <a href="resort.html" class="btn resort">🏨 Resort</a>
-
-        <div class="note">
-            Quick booking • No login required
+        <!-- RESTAURANT CARD -->
+        <div class="card">
+            <img src="images/restaurant.jpg" alt="Restaurant">
+            <div class="card-content">
+                <h2>🍽 Restaurant</h2>
+                <p>View menu, prices & book your table</p>
+                <a href="restaurant.html" class="btn btn-restaurant">
+                    View Menu & Book
+                </a>
+            </div>
         </div>
+
+        <!-- RESORT CARD -->
+        <div class="card">
+            <img src="images/resort.jpg" alt="Resort">
+            <div class="card-content">
+                <h2>🏨 Resort</h2>
+                <p>Rooms, full resort booking & stay</p>
+                <a href="resort.html" class="btn btn-resort">
+                    View Rooms & Book
+                </a>
+            </div>
+        </div>
+
     </div>
 </div>
 
