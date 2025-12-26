@@ -9,85 +9,146 @@
 body{
     margin:0;
     font-family:"Segoe UI",Arial,sans-serif;
-    background:#f0f9f4;
+    background:#f4f6f8;
     color:#333;
 }
 
 /* HEADER */
 header{
-    background:linear-gradient(135deg,#2ecc71,#27ae60);
+    background:linear-gradient(135deg,#27ae60,#2ecc71);
     color:#fff;
     text-align:center;
-    padding:45px 16px;
+    padding:50px 16px;
 }
-header h1{margin:0}
+header h1{margin:0;font-size:32px}
 header p{margin-top:6px;opacity:.95}
 
 /* CONTAINER */
 .container{
+    max-width:520px;
+    margin:30px auto;
     padding:20px;
-    display:flex;
-    justify-content:center;
 }
 
 /* CARD */
 .card{
     background:#fff;
     border-radius:18px;
-    padding:30px 24px;
-    max-width:420px;
-    width:100%;
+    padding:26px;
     box-shadow:0 12px 30px rgba(0,0,0,.15);
     text-align:center;
 }
 
-/* ICON */
-.icon{
+/* CHECK ICON */
+.check{
     font-size:64px;
-    margin-bottom:10px;
+    color:#27ae60;
 }
 
-/* BOOKING ID */
-.booking-id{
-    background:#ecfdf3;
-    border:1px dashed #27ae60;
-    padding:12px;
-    border-radius:8px;
-    margin:16px 0;
-    font-weight:600;
-}
-
-/* SUMMARY */
-.summary{
-    text-align:left;
-    margin-top:15px;
-}
-.summary-row{
+/* DETAILS */
+.detail{
     display:flex;
     justify-content:space-between;
-    margin-bottom:10px;
+    margin-top:12px;
+    font-size:15px;
 }
+.detail strong{color:#555}
 
 /* AMOUNT */
 .amount{
+    margin-top:18px;
     font-size:22px;
-    font-weight:bold;
+    font-weight:700;
     color:#27ae60;
-    text-align:center;
-    margin:20px 0;
 }
 
-/* BUTTON */
+/* BUTTONS */
 .btn{
     display:block;
-    width:100%;
-    padding:16px;
     margin-top:18px;
+    padding:14px;
     border-radius:12px;
-    font-size:17px;
     text-decoration:none;
-    color:white;
+    font-weight:600;
+    color:#fff;
+}
+
+.btn-home{
+    background:#2980b9;
+}
+
+.btn-print{
+    background:#7f8c8d;
+}
+
+/* NOTE */
+.note{
+    margin-top:16px;
+    font-size:13px;
+    color:#666;
+}
+
+/* FOOTER */
+.footer{
+    background:#222;
+    color:#eee;
+    margin-top:40px;
+    padding-top:30px;
+}
+.footer-container{
+    max-width:1100px;
+    margin:auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+}
+.footer-block h3{
+    margin-top:0;
+    color:#27ae60;
+    font-size:16px;
+}
+.footer-block p,
+.footer-block a{
+    font-size:14px;
+    color:#ccc;
+    text-decoration:none;
+}
+.footer-block a:hover{color:#27ae60;}
+.map-btn{
+    display:inline-block;
+    margin-top:8px;
+    padding:10px 14px;
     background:#27ae60;
+    color:#fff !important;
+    border-radius:8px;
+}
+.footer-bottom{
+    margin-top:30px;
+    text-align:center;
+    padding:14px;
+    background:#111;
+    font-size:13px;
+    color:#aaa;
+}
+
+/* FLOATING WHATSAPP */
+.whatsapp-float{
+    position:fixed;
+    bottom:22px;
+    right:20px;
+    width:56px;
+    height:56px;
+    background:#25d366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    text-decoration:none;
+    box-shadow:0 8px 18px rgba(0,0,0,.3);
+    z-index:999;
 }
 </style>
 </head>
@@ -95,68 +156,100 @@ header p{margin-top:6px;opacity:.95}
 <body>
 
 <header>
-    <h1>Booking Successful 🎉</h1>
-    <p>Thank you for choosing us</p>
+<h1>✅ Booking Confirmed</h1>
+<p>Thank you for choosing us</p>
 </header>
 
 <div class="container">
-    <div class="card">
+<div class="card">
 
-        <div class="icon">✅</div>
-        <h2>Thank You!</h2>
-        <p>Your booking has been confirmed.</p>
+<div class="check">✔</div>
+<h2>Your booking is successful</h2>
 
-        <div class="booking-id">
-            Booking ID: <span id="bookingId">-</span>
-        </div>
-
-        <div class="summary">
-            <div class="summary-row">
-                <strong>Service</strong>
-                <span id="service">-</span>
-            </div>
-            <div class="summary-row">
-                <strong>Item</strong>
-                <span id="item">-</span>
-            </div>
-        </div>
-
-        <div class="amount" id="amount">₹ 0</div>
-
-        <a href="index.html" class="btn">
-            Back to Home
-        </a>
-
-    </div>
+<div class="detail">
+<strong>Booking ID</strong>
+<span id="bookingId">-</span>
 </div>
 
-<script>
-// READ BOOKING DATA
-const booking = JSON.parse(localStorage.getItem("booking"));
+<div class="detail">
+<strong>Service</strong>
+<span id="service">-</span>
+</div>
 
-// BLOCK DIRECT ACCESS
-if (!booking || !booking.service || !booking.item || !booking.amount) {
-    window.location.href = "index.html";
-}
+<div class="detail">
+<strong>Details</strong>
+<span id="item">-</span>
+</div>
+
+<div class="amount" id="amount">₹0</div>
+
+<a href="index.html" class="btn btn-home">Back to Home</a>
+<a href="#" onclick="window.print()" class="btn btn-print">Print / Save</a>
+
+<div class="note">
+Please show this confirmation at the restaurant / resort if required.
+</div>
+
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-container">
+
+<div class="footer-block">
+<h3>📍 Address</h3>
+<p>
+ABC Restaurant & Resort<br>
+Beach Road, Visakhapatnam
+</p>
+</div>
+
+<div class="footer-block">
+<h3>📞 Contact</h3>
+<p>
+<a href="tel:9876543210">+91 98765 43210</a><br>
+<a href="https://wa.me/919876543210" target="_blank">WhatsApp Chat</a>
+</p>
+</div>
+
+<div class="footer-block">
+<h3>🗺 Location</h3>
+<a class="map-btn"
+   href="https://www.google.com/maps?q=Visakhapatnam"
+   target="_blank">
+View on Google Maps
+</a>
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2025 ABC Restaurant & Resort
+</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210"
+   class="whatsapp-float"
+   target="_blank">💬</a>
+
+<script>
+const booking = JSON.parse(localStorage.getItem("booking")) || {};
 
 // GENERATE BOOKING ID
-function generateBookingId(){
-    return "BK" + Math.floor(Math.random() * 900000 + 100000);
+function generateId(){
+    return "BK" + Math.floor(Math.random()*900000+100000);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("service").innerText = booking.service;
-    document.getElementById("item").innerText = booking.item;
-    document.getElementById("amount").innerText = "₹ " + booking.amount;
-    document.getElementById("bookingId").innerText = generateBookingId();
+document.getElementById("bookingId").innerText = generateId();
+document.getElementById("service").innerText = booking.service || "-";
+document.getElementById("item").innerText = booking.item || "-";
+document.getElementById("amount").innerText = "₹ " + (booking.amount || 0);
 
-    // CLEAR BOOKING AFTER SUCCESS (REAL BEHAVIOR)
-    setTimeout(() => {
-        localStorage.removeItem("booking");
-    }, 3000);
-});
+// CLEAR BOOKING AFTER SUCCESS
+localStorage.removeItem("booking");
 </script>
->
 
 </body>
 </html>

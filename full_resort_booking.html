@@ -96,6 +96,70 @@ input{
     color:#555;
     text-decoration:none;
 }
+
+/* FOOTER */
+.footer{
+    background:#222;
+    color:#eee;
+    margin-top:40px;
+    padding-top:30px;
+}
+.footer-container{
+    max-width:1100px;
+    margin:auto;
+    padding:0 20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+}
+.footer-block h3{
+    margin-top:0;
+    color:#27ae60;
+    font-size:16px;
+}
+.footer-block p,
+.footer-block a{
+    font-size:14px;
+    color:#ccc;
+    text-decoration:none;
+}
+.footer-block a:hover{color:#27ae60;}
+.map-btn{
+    display:inline-block;
+    margin-top:8px;
+    padding:10px 14px;
+    background:#27ae60;
+    color:#fff !important;
+    border-radius:8px;
+}
+.footer-bottom{
+    margin-top:30px;
+    text-align:center;
+    padding:14px;
+    background:#111;
+    font-size:13px;
+    color:#aaa;
+}
+
+/* FLOATING WHATSAPP */
+.whatsapp-float{
+    position:fixed;
+    bottom:22px;
+    right:20px;
+    width:56px;
+    height:56px;
+    background:#25d366;
+    color:#fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    text-decoration:none;
+    box-shadow:0 8px 18px rgba(0,0,0,.3);
+    z-index:999;
+}
+.whatsapp-float:hover{transform:scale(1.05);}
 </style>
 </head>
 
@@ -116,15 +180,15 @@ input{
 <input id="mobile" placeholder="10-digit Mobile Number">
 
 <label>Check-in Date</label>
-<input type="date" id="checkin">
+<input type="date" id="checkin" onchange="calculatePrice()">
 
 <label>Check-out Date</label>
-<input type="date" id="checkout">
+<input type="date" id="checkout" onchange="calculatePrice()">
 
 <label>Number of Guests</label>
 <input type="number" id="guests" min="1">
 
-<div class="price">₹25,000 / day</div>
+<div class="price" id="price">₹25,000 / day</div>
 
 <button class="btn" onclick="bookResort()">Proceed to Payment</button>
 
@@ -137,9 +201,81 @@ Includes all rooms, common areas & facilities.
 <a href="resort_home.html" class="back">⬅ Back to Resort</a>
 </div>
 
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-block">
+            <h3>📍 Address</h3>
+            <p>
+                ABC Restaurant & Resort<br>
+                Beach Road, Visakhapatnam<br>
+                Andhra Pradesh
+            </p>
+        </div>
+
+        <div class="footer-block">
+            <h3>📞 Contact</h3>
+            <p>
+                Phone: <a href="tel:9876543210">+91 98765 43210</a><br>
+                WhatsApp: <a href="https://wa.me/919876543210" target="_blank">
+                    Chat Now
+                </a>
+            </p>
+        </div>
+
+        <div class="footer-block">
+            <h3>🗺 Location</h3>
+            <a class="map-btn"
+               href="https://www.google.com/maps?q=Visakhapatnam"
+               target="_blank">
+               View on Google Maps
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2025 ABC Restaurant & Resort. All rights reserved.
+    </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919876543210"
+   class="whatsapp-float"
+   target="_blank"
+   title="Chat on WhatsApp">
+💬
+</a>
+
 <script>
+const PER_DAY = 25000;
+let totalAmount = PER_DAY;
+
+function calculatePrice(){
+    const checkin = document.getElementById("checkin").value;
+    const checkout = document.getElementById("checkout").value;
+    if(!checkin || !checkout) return;
+
+    const inDate = new Date(checkin);
+    const outDate = new Date(checkout);
+    const diff = (outDate - inDate) / (1000*60*60*24);
+
+    if(diff <= 0){
+        alert("Check-out date must be after check-in date");
+        document.getElementById("checkout").value="";
+        totalAmount = PER_DAY;
+        document.getElementById("price").innerText="₹25,000 / day";
+        return;
+    }
+
+    totalAmount = diff * PER_DAY;
+    document.getElementById("price").innerText =
+        `₹${totalAmount.toLocaleString()} (${diff} day${diff>1?"s":""})`;
+}
+
 function bookResort(){
-    const name=document.getElementById("name").value.trim();
+    const name=nameInput=name=document.getElementById("name").value.trim();
     const mobile=document.getElementById("mobile").value.trim();
     const checkin=document.getElementById("checkin").value;
     const checkout=document.getElementById("checkout").value;
@@ -158,7 +294,7 @@ function bookResort(){
     localStorage.setItem("booking",JSON.stringify({
         service:"Full Resort Booking",
         item:`${guests} guests (${checkin} to ${checkout})`,
-        amount:25000
+        amount: totalAmount
     }));
 
     window.location.href="payment.html";
