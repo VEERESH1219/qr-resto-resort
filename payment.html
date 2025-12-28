@@ -6,90 +6,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: #f4f6f8;
-    color: #333;
+body{
+    margin:0;
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:#f4f6f8;
+    color:#333;
 }
 
 /* HEADER */
-header {
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
-    color: white;
-    text-align: center;
-    padding: 40px 15px;
+header{
+    background:linear-gradient(135deg,#27ae60,#2ecc71);
+    color:#fff;
+    text-align:center;
+    padding:40px 16px;
 }
+header h1{margin:0}
+header p{margin-top:6px;opacity:.95}
 
 /* CONTAINER */
-.container {
-    padding: 20px;
-    max-width: 500px;
-    margin: auto;
+.container{
+    max-width:520px;
+    margin:30px auto;
+    padding:20px;
 }
 
 /* CARD */
-.card {
-    background: white;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+.card{
+    background:#fff;
+    border-radius:20px;
+    padding:26px;
+    box-shadow:0 14px 35px rgba(0,0,0,.18);
 }
 
 /* SUMMARY */
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 12px;
-    font-size: 16px;
+.row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:12px;
+    font-size:15px;
 }
-.amount {
-    font-size: 26px;
-    font-weight: bold;
-    color: #27ae60;
-    text-align: center;
-    margin: 22px 0;
+.amount{
+    font-size:26px;
+    font-weight:700;
+    color:#27ae60;
+    text-align:center;
+    margin:20px 0;
 }
 
-/* UPI BUTTONS */
+/* UPI */
 .upi-btn{
     display:flex;
     align-items:center;
     justify-content:center;
     padding:14px;
     margin-top:12px;
-    border-radius:12px;
+    border-radius:14px;
     font-size:16px;
     font-weight:600;
     color:#fff;
     text-decoration:none;
 }
-.gpay{background:#000;}
-.phonepe{background:#5f259f;}
-.paytm{background:#002970;}
+.gpay{background:#000}
+.phonepe{background:#5f259f}
+.paytm{background:#002970}
 
-.demo-note{
+/* INFO */
+.info{
+    background:#eefaf1;
+    border-left:4px solid #27ae60;
+    padding:12px;
+    margin-top:16px;
+    font-size:14px;
+    color:#1e8449;
+    border-radius:8px;
+}
+
+/* DEMO NOTE */
+.demo{
     background:#fff3cd;
     border-left:4px solid #f39c12;
     padding:12px;
     margin-top:16px;
-    font-size:14px;
+    font-size:13px;
     color:#7a4f01;
-    border-radius:6px;
+    border-radius:8px;
+}
+
+/* BUTTON */
+.done{
+    margin-top:18px;
+    background:#27ae60;
 }
 
 /* FOOTER */
 .footer{
-    background:#222;
-    color:#eee;
-    margin-top:40px;
+    background:#111;
+    color:#aaa;
     padding:14px;
     text-align:center;
     font-size:13px;
+    margin-top:40px;
 }
 
-/* FLOATING WHATSAPP */
-.whatsapp-float{
+/* WHATSAPP */
+.whatsapp{
     position:fixed;
     bottom:22px;
     right:20px;
@@ -113,7 +133,7 @@ header {
 
 <header>
 <h1>🔒 Secure Payment</h1>
-<p>UPI Demo Mode</p>
+<p>UPI Payment</p>
 </header>
 
 <div class="container">
@@ -121,70 +141,76 @@ header {
 
 <h2>Booking Summary</h2>
 
-<div class="summary-row">
+<div class="row">
+<strong>Booking ID</strong>
+<span id="bookingId">-</span>
+</div>
+
+<div class="row">
 <strong>Service</strong>
 <span id="service">-</span>
 </div>
 
-<div class="summary-row">
+<div class="row">
 <strong>Details</strong>
-<span id="item">-</span>
+<span id="details">-</span>
 </div>
 
 <div class="amount" id="amount">₹0</div>
 
-<!-- UPI BUTTONS -->
+<!-- UPI -->
 <a id="gpay" class="upi-btn gpay">Pay with Google Pay</a>
 <a id="phonepe" class="upi-btn phonepe">Pay with PhonePe</a>
 <a id="paytm" class="upi-btn paytm">Pay with Paytm</a>
 
-<div class="demo-note">
+<div class="demo">
 ⚠️ Demo Mode: This opens a UPI app.<br>
-After payment, click below to continue.
+After completing payment, click below.
 </div>
 
-<a id="doneBtn" class="upi-btn gpay" style="margin-top:14px;">
+<a id="doneBtn" class="upi-btn done">
 I have completed payment
 </a>
 
-<a href="javascript:history.back()" style="display:block;text-align:center;margin-top:16px;color:#555;">
+<a href="javascript:history.back()"
+   style="display:block;text-align:center;margin-top:16px;color:#555;">
 Cancel
 </a>
 
 </div>
 </div>
 
-<footer class="footer">
+<div class="footer">
 © 2025 ABC Restaurant & Resort
-</footer>
+</div>
 
 <a href="https://wa.me/919876543210"
-   class="whatsapp-float"
+   class="whatsapp"
    target="_blank">💬</a>
 
 <script>
-/* GET BOOKING ID FROM URL */
 const params = new URLSearchParams(window.location.search);
 const bookingId = params.get("id");
 
 if(!bookingId){
     alert("Invalid access");
-    window.location.href = "index.html";
+    window.location.href="index.html";
 }
 
-/* FETCH BOOKING FROM BACKEND */
+document.getElementById("bookingId").innerText = bookingId;
+
+/* FETCH BOOKING */
 fetch("http://127.0.0.1:5000/api/bookings/" + bookingId)
-.then(res => {
-    if(!res.ok) throw new Error("Booking not found");
+.then(res=>{
+    if(!res.ok) throw new Error();
     return res.json();
 })
-.then(data => {
+.then(data=>{
     document.getElementById("service").innerText = data.service;
-    document.getElementById("item").innerText = data.details;
+    document.getElementById("details").innerText = data.details;
     document.getElementById("amount").innerText = "₹ " + data.amount;
 
-    /* SET UPI LINKS */
-    const upiId = "demo@upi";   // replace later
+    const upiId = "demo@upi"; // replace later
     const name = "ABC Restaurant & Resort";
     const amount = data.amount;
 
@@ -195,14 +221,12 @@ fetch("http://127.0.0.1:5000/api/bookings/" + bookingId)
     document.getElementById("phonepe").href = upiLink;
     document.getElementById("paytm").href = upiLink;
 
-    /* SUCCESS BUTTON */
     document.getElementById("doneBtn").href =
         "success.html?id=" + bookingId;
 })
-.catch(err => {
-    alert("Unable to load booking");
-    console.error(err);
-    window.location.href = "index.html";
+.catch(()=>{
+    alert("Booking not found");
+    window.location.href="index.html";
 });
 </script>
 

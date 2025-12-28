@@ -15,41 +15,43 @@ body{
 
 /* HEADER */
 header{
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
+    background:
+      linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+      url("images/restaurant.jpg") center/cover no-repeat;
     color:#fff;
     text-align:center;
-    padding:40px 16px;
+    padding:70px 16px 60px;
 }
-header h1{margin:0}
-header p{margin-top:6px;opacity:.95}
+header h1{margin:0;font-size:34px}
+header p{margin-top:8px;opacity:.95}
 
 /* CONTAINER */
 .container{
     max-width:420px;
-    margin:30px auto;
+    margin:-40px auto 0;
     padding:20px;
 }
 
 /* CARD */
 .card{
     background:#fff;
-    border-radius:18px;
-    padding:24px;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+    border-radius:20px;
+    padding:26px;
+    box-shadow:0 14px 35px rgba(0,0,0,.18);
 }
 
 /* INPUTS */
-.card label{
+label{
     font-size:14px;
     font-weight:600;
-    margin-top:12px;
+    margin-top:14px;
     display:block;
 }
-.card input{
+input{
     width:100%;
     padding:12px;
     margin-top:6px;
-    border-radius:8px;
+    border-radius:10px;
     border:1px solid #ccc;
     font-size:15px;
 }
@@ -57,12 +59,12 @@ header p{margin-top:6px;opacity:.95}
 /* BUTTON */
 .btn{
     width:100%;
-    margin-top:18px;
-    padding:14px;
+    margin-top:22px;
+    padding:15px;
     background:#27ae60;
     color:#fff;
     border:none;
-    border-radius:12px;
+    border-radius:14px;
     font-size:16px;
     font-weight:600;
     cursor:pointer;
@@ -72,83 +74,20 @@ header p{margin-top:6px;opacity:.95}
 .note{
     background:#fdf2f2;
     border-left:4px solid #e74c3c;
-    padding:10px;
-    margin-top:14px;
+    padding:12px;
+    margin-top:16px;
     font-size:13px;
     color:#7a2d2d;
-    border-radius:6px;
+    border-radius:8px;
 }
 
 /* BACK */
 .back{
     display:block;
     text-align:center;
-    margin:20px 0;
+    margin:24px 0;
     color:#555;
     text-decoration:none;
-}
-
-/* FOOTER */
-.footer{
-    background:#222;
-    color:#eee;
-    margin-top:40px;
-    padding-top:30px;
-}
-.footer-container{
-    max-width:1100px;
-    margin:auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:24px;
-}
-.footer-block h3{
-    margin-top:0;
-    color:#27ae60;
-    font-size:16px;
-}
-.footer-block p,
-.footer-block a{
-    font-size:14px;
-    color:#ccc;
-    text-decoration:none;
-}
-.footer-block a:hover{color:#27ae60;}
-.map-btn{
-    display:inline-block;
-    margin-top:8px;
-    padding:10px 14px;
-    background:#27ae60;
-    color:#fff !important;
-    border-radius:8px;
-}
-.footer-bottom{
-    margin-top:30px;
-    text-align:center;
-    padding:14px;
-    background:#111;
-    font-size:13px;
-    color:#aaa;
-}
-
-/* FLOATING WHATSAPP */
-.whatsapp-float{
-    position:fixed;
-    bottom:22px;
-    right:20px;
-    width:56px;
-    height:56px;
-    background:#25d366;
-    color:#fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-    text-decoration:none;
-    box-shadow:0 8px 18px rgba(0,0,0,.3);
-    z-index:999;
 }
 </style>
 </head>
@@ -156,8 +95,8 @@ header p{margin-top:6px;opacity:.95}
 <body>
 
 <header>
-<h1>🍽 Table Booking</h1>
-<p>Reserve your table easily</p>
+<h1>🍽 Table Reservation</h1>
+<p>Reserve your table in seconds</p>
 </header>
 
 <div class="container">
@@ -178,10 +117,13 @@ header p{margin-top:6px;opacity:.95}
 <label>Number of Guests</label>
 <input type="number" id="guests" min="1" placeholder="Guests">
 
-<button class="btn" onclick="bookTable()">Confirm Table Booking</button>
+<button class="btn" onclick="bookTable()">
+Confirm & Pay ₹200
+</button>
 
 <div class="note">
-A table reservation charge of <strong>₹200</strong> applies.
+A table reservation charge of <strong>₹200</strong> applies.<br>
+This amount will be adjusted in your bill.
 </div>
 
 </div>
@@ -189,72 +131,47 @@ A table reservation charge of <strong>₹200</strong> applies.
 <a href="restaurant_home.html" class="back">⬅ Back to Restaurant</a>
 </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-<div class="footer-container">
-
-<div class="footer-block">
-<h3>📍 Address</h3>
-<p>
-ABC Restaurant & Resort<br>
-Beach Road, Visakhapatnam
-</p>
-</div>
-
-<div class="footer-block">
-<h3>📞 Contact</h3>
-<p>
-<a href="tel:9876543210">+91 98765 43210</a><br>
-<a href="https://wa.me/919876543210" target="_blank">WhatsApp Chat</a>
-</p>
-</div>
-
-<div class="footer-block">
-<h3>🗺 Location</h3>
-<a class="map-btn"
-   href="https://www.google.com/maps?q=Visakhapatnam"
-   target="_blank">
-View on Google Maps
-</a>
-</div>
-
-</div>
-
-<div class="footer-bottom">
-© 2025 ABC Restaurant & Resort
-</div>
-</footer>
-
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/919876543210"
-   class="whatsapp-float"
-   target="_blank">💬</a>
-
 <script>
 function bookTable(){
-    const name=document.getElementById("name").value.trim();
-    const mobile=document.getElementById("mobile").value.trim();
-    const date=document.getElementById("date").value;
-    const time=document.getElementById("time").value;
-    const guests=document.getElementById("guests").value;
+    const name = document.getElementById("name").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const date = document.getElementById("date").value;
+    const time = document.getElementById("time").value;
+    const guests = document.getElementById("guests").value;
 
-    if(!name||!mobile||!date||!time||!guests){
+    if(!name || !mobile || !date || !time || !guests){
         alert("Please fill all details");
         return;
     }
 
-    if(mobile.length!==10||isNaN(mobile)){
+    if(mobile.length !== 10 || isNaN(mobile)){
         alert("Enter valid 10-digit mobile number");
         return;
     }
 
-    localStorage.setItem("booking",JSON.stringify({
-        service:"Restaurant Table Booking",
-        item:`Table for ${guests} on ${date} at ${time}`,
-        amount:200
-    }));
+    const details = `Table for ${guests} on ${date} at ${time} (Name: ${name}, Mobile: ${mobile})`;
 
-    window.location.href="payment.html";
+    fetch("http://127.0.0.1:5000/api/bookings",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body:JSON.stringify({
+            service:"Restaurant Table Booking",
+            details:details,
+            amount:200
+        })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        if(data.booking_id){
+            localStorage.setItem("booking_id", data.booking_id);
+            window.location.href = "payment.html?id=" + data.booking_id;
+        }else{
+            alert("Booking failed");
+        }
+    })
+    .catch(()=>{
+        alert("Backend not running");
+    });
 }
 </script>
 

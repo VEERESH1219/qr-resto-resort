@@ -134,7 +134,6 @@ header{
    target="_blank">💬</a>
 
 <script>
-/* GET BOOKING ID FROM URL */
 const params = new URLSearchParams(window.location.search);
 const bookingId = params.get("id");
 
@@ -143,32 +142,31 @@ if(!bookingId){
     window.location.href="index.html";
 }
 
-/* FETCH FROM BACKEND */
 fetch("http://127.0.0.1:5000/api/bookings/" + bookingId)
-.then(res=>{
-    if(!res.ok) throw new Error("Booking not found");
+.then(res => {
+    if(!res.ok) throw new Error();
     return res.json();
 })
-.then(data=>{
+.then(data => {
     document.getElementById("bookingId").innerText = data.booking_id;
     document.getElementById("service").innerText = data.service;
     document.getElementById("item").innerText = data.details;
     document.getElementById("status").innerText = data.status;
     document.getElementById("amount").innerText = "₹ " + data.amount;
+
+    // UPDATE STATUS TO PAID (SUCCESS PAGE = PAYMENT DONE)
+    fetch("http://127.0.0.1:5000/api/bookings/" + bookingId + "/status", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "PAID" })
+    });
 })
-.catch(err=>{
-    alert("Invalid booking");
+.catch(() => {
+    alert("Booking not found");
     window.location.href="index.html";
 });
-
-// MARK BOOKING AS PAID
-fetch("http://127.0.0.1:5000/api/bookings/" + bookingId + "/status", {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ status: "PAID" })
-});
-
 </script>
+
 
 </body>
 </html>
